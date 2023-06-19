@@ -37,7 +37,7 @@ const UserSchema = new Schema({
   task: [
     {
       title: String,
-      desvription: String,
+      description: String,
       completed: Boolean,
       createdAt: Date,
     },
@@ -55,6 +55,8 @@ UserSchema.pre("save", async function () {
     this.password = await bcrypt.hashSync(this.password, 10);
   }
 });
+
+UserSchema.index({ OTP_expire: 1 }, { expireAfterSeconds: 0 });
 
 const UserModel = mongoose.model("user", UserSchema);
 module.exports = UserModel;
