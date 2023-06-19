@@ -1,0 +1,14 @@
+const express = require("express");
+const router = express.Router();
+const controller = require("../controller/usercontroller");
+const TokenVerify = require("../middleware/TokenVerify");
+
+router.post("/createUser", controller.createUser);
+
+router.post("/verifyUser", controller.verifyOtp);
+
+router.post("/login", controller.Login);
+
+router.get("/me", TokenVerify, controller.getUser);
+
+module.exports = router;
